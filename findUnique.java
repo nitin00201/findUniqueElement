@@ -2,9 +2,10 @@ import java.util.HashMap;
 
 public class findUnique {
 
-    public static char firstUniqueCharacter(String str) {
+    public static int firstUniqueCharacter(String str) {
         HashMap<Character, Integer> charCountMap = new HashMap<>();
-        for (char ch : str.toCharArray()) {
+        for (int i = 0; i < str.length(); i++) {
+            char ch = str.charAt(i);
             if (charCountMap.containsKey(ch)) {
                 charCountMap.put(ch, charCountMap.get(ch) + 1);
             } else {
@@ -12,19 +13,21 @@ public class findUnique {
             }
         }
 
+        int index = -1;
         for (int i = 0; i < str.length(); i++) {
             char ch = str.charAt(i);
             if (charCountMap.get(ch) == 1) {
-                return ch;
+                index = i;
+                break;
             }
         }
 
-        return '\0';
+        return index;
     }
 
     public static void main(String[] args) {
         String str = "helloworld";
-        char ch = firstUniqueCharacter(str);
-        System.out.println(ch);
+        int index = firstUniqueCharacter(str);
+        System.out.println(index);
     }
 }
